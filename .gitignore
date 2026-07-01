@@ -1,0 +1,19 @@
+# Thu muc build (sinh ra khi compile, khong can commit)
+build/
+cmake-build-debug/
+cmake-build-release/
+
+# File thuc thi va object
+*.exe
+*.obj
+*.o
+
+# Visual Studio / CLion
+.vs/
+.idea/
+*.user
+
+# CMake cache
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
