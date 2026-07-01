@@ -1,4 +1,4 @@
-# CatPopup 🐱
+# MEME CAT
 
 Chương trình chạy ngầm trên Windows, lắng nghe phím tắt và hiện popup ảnh mèo kèm tiếng kêu.
 
@@ -9,10 +9,6 @@ Chương trình chạy ngầm trên Windows, lắng nghe phím tắt và hiện 
 | Tổ hợp phím | Hành động |
 |-------------|-----------|
 | **Ctrl + Alt + 1** | Hiện popup ảnh mèo + phát meow.mp3, tự đóng sau 2.5 giây |
-
-> **Tại sao dùng Ctrl + Alt + 1?**  
-> WinAPI yêu cầu hotkey toàn cục phải có ít nhất một modifier key (Ctrl, Alt, Shift, Win).  
-> Tổ hợp `Ctrl + Alt + 1` đơn giản, ít bị xung đột với phần mềm khác, và dễ đăng ký.
 
 ---
 
@@ -69,48 +65,12 @@ cùng với thư mục `assets\` được tự động copy vào.
 ---
 
 ## Cách chạy
-
-1. Đặt file `cat.png` và `meow.mp3` vào thư mục `assets/` (xem bên dưới)
-2. Build project
-3. Chạy `CatPopup.exe` — chương trình sẽ biến mất (chạy ngầm, không có cửa sổ)
-4. Nhấn **Ctrl + Alt + 1** để xem mèo 🐱
+1. Chạy `CatPopup.exe` — chương trình sẽ biến mất (chạy ngầm, không có cửa sổ)
+4. Nhấn **Ctrl + Alt + 1** để xem con mèo cười vào mặt bạn :))
 
 ### Thoát chương trình
 
 Vào **Task Manager** → tìm `CatPopup.exe` → End Task.  
-*(Hoặc bạn có thể thêm tray icon để thoát tiện hơn — phần nâng cao)*
-
----
-
-## Chuẩn bị assets
-
-Chương trình cần 2 file trong thư mục `assets/`:
-
-| File | Yêu cầu |
-|------|---------|
-| `cat.png` | Ảnh PNG bất kỳ. Chương trình tự co giãn để vừa cửa sổ 400×400. |
-| `meow.mp3` | File MP3 tiếng kêu mèo. Tìm trên [freesound.org](https://freesound.org) (miễn phí). |
-
-Nếu thiếu file, chương trình vẫn chạy — popup sẽ hiện chữ thay thế khi thiếu ảnh, và im lặng khi thiếu âm thanh.
-
----
-
-## Kiến trúc (dành cho người muốn hiểu sâu hơn)
-
-```
-WinMain()
-  │
-  ├─ InitGdiPlus()          ← Bật thư viện đồ họa để đọc PNG
-  ├─ Tạo hidden window      ← Cửa sổ ẩn, chỉ để nhận WM_HOTKEY
-  ├─ RegisterCatHotkey()    ← Đăng ký Ctrl+Alt+1 với Windows
-  │
-  └─ Message Loop (vô hạn)
-       │
-       └─ WM_HOTKEY nhận được
-            ├─ PlayMeow()       ← Phát MP3 (non-blocking)
-            └─ ShowCatPopup()   ← Tạo popup + message loop riêng
-                 └─ WM_TIMER    ← Sau 2.5s → DestroyWindow → thoát loop
-```
 
 ---
 
